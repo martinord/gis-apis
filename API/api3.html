@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html>
+	<body>
+		<h1>KML API3</h1>
+		<div id = "googleMap" style="height: 700px;width:700px"></div>
+		
+		<script>
+			function initMap() {
+			
+				var mapOptions = {
+					center: new google.maps.LatLng(51.88328,-3.43684), 
+					zoom: 11, 
+					mapTypeId: google.maps.MapTypeId.ROADMAP
+				};
+				
+				var map = new google.maps.Map(document.getElementById("googleMap"),mapOptions);
+				
+				var kmlLayer = new google.maps.KmlLayer('http://at-web2.comp.glam.ac.uk/students/18111777/API/myKml.kml',
+														{map: map,
+														 preserveViewport: true});
+
+			}
+		</script>
+		
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEslfwKJo0N4lfsbZLwrSFzd7ic2e5Kz0&callback=initMap"></script>
+	</body>
+</html>

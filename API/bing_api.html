@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html> 
+	<head>
+		<style>
+			#bingMap {
+				height: 100%;
+			}
+			
+			html, body {
+				height: 100%;
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<h2>My Bing Maps API test</h2>
+		<div id="bingMap"></div>
+		
+		<script>
+			function loadMap() {
+				var theMap = 
+				new Microsoft.Maps.Map(document.getElementById('bingMap'), 
+								{
+										credentials: 'AkbAb1zrNzoFEpo5UDJRuugqkoUzAKC09iRghiMFp_H__HFq9OvJMNu6U14CgvAz' ,
+										center: new Microsoft.Maps.Location(51.503376, -0.119538),
+										mapTypeId: Microsoft.Maps.MapTypeId.aerial,
+										zoom: 7 
+								});      
+				}
+		</script>
+		
+		<script src='https://www.bing.com/api/maps/mapcontrol?callback=loadMap'></script>
+	</body>
+</html>
+

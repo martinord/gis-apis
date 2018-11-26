@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Martino Rivera - Google Map</title>
+		<link rel="stylesheet" type="text/css" href="../css/site.css">
+	</head>
+	<body>
+		<h1 class="heading">My Google Maps Page</h1>
+		<div id = "googleMap"></div>
+		
+		<script>
+			function initMap() {
+			
+				var mapOptions = {
+					center: new google.maps.LatLng(51.503376, -0.119538), 
+					zoom: 7, 
+					mapTypeId: google.maps.MapTypeId.ROADMAP,
+					
+					// Map typing
+					disableDefaultUI: true,
+					zoomControl: true,
+					zoomControlOptions: {
+						position: google.maps.ControlPosition.RIGHT_CENTER
+					},
+					gestureHandling: 'greedy' // disables the ctrl+scroll zooming
+				};
+				
+				var map = new google.maps.Map(document.getElementById("googleMap"),mapOptions);
+			}
+		</script>
+		
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEslfwKJo0N4lfsbZLwrSFzd7ic2e5Kz0&callback=initMap"></script>
+	</body>
+</html>

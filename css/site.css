@@ -1,0 +1,26 @@
+/*This is the style file*/
+
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.heading{
+	margin: auto;
+	width: 90%;
+	padding: 1%;
+	text-align: center;
+}
+
+.heading > h1{font-size:20}
+.heading > h2{font-size:17}
+
+#googleMap {
+	height: 90%;
+}
+
+#bingMap {
+	height: 100%;
+}
+

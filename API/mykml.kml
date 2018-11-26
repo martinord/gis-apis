@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+
+<Placemark>
+	<name>Brecon</name>
+	<description>Brecon</description>
+	<Point>
+		<coordinates>-3.391451,51.949012,0</coordinates>
+	</Point>
+</Placemark>
+
+<Placemark>
+	<name>Pen y Fan</name>
+	<description>Pen y Fan</description>
+	<Point>
+		<coordinates>-3.43684, 51.88328</coordinates>
+	</Point>
+</Placemark>
+
+</Document>
+</kml>

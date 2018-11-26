@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<style>
+			#googleMap {
+				height: 100%;
+			}
+			
+			html, body {
+				height: 100%;
+				margin: 0;
+				padding: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>My Google Maps API test</h1>
+		<div id = "googleMap" style="height:480px;width:480px"></div>
+		
+		<script>
+			function initMap() {
+			
+				var mapOptions = {
+					center: new google.maps.LatLng(52.417,-3.573), 
+					zoom: 8, 
+					mapTypeId: google.maps.MapTypeId.ROADMAP
+				};
+				
+				var map = new google.maps.Map(document.getElementById("googleMap"),mapOptions);
+			}
+		</script>
+		
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEslfwKJo0N4lfsbZLwrSFzd7ic2e5Kz0&callback=initMap"></script>
+	</body>
+</html>
