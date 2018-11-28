@@ -1,35 +1,70 @@
 <!DOCTYPE html>
-
 <html>
 	<head>
+		<meta charset="utf-8">
 		<title>Martino Rivera - Google Map</title>
 		<link rel="stylesheet" type="text/css" href="../css/site.css">
 	</head>
 	<body>
 		<h1 class="heading">My Google Maps Page</h1>
 		<div id = "googleMap"></div>
-		
+
 		<script>
-			function initMap() {
-			
-				var mapOptions = {
-					center: new google.maps.LatLng(51.503376, -0.119538), 
-					zoom: 7, 
-					mapTypeId: google.maps.MapTypeId.ROADMAP,
-					
-					// Map typing
-					disableDefaultUI: true,
-					zoomControl: true,
-					zoomControlOptions: {
-						position: google.maps.ControlPosition.RIGHT_CENTER
-					},
-					gestureHandling: 'greedy' // disables the ctrl+scroll zooming
+
+			// AJAX function to load a JSON
+			function fetchJSONFile(path, callback) {
+				var httpRequest = new XMLHttpRequest();
+				httpRequest.overrideMimeType("appplication/json");
+				httpRequest.onreadystatechange = function() {
+					if ((httpRequest.readyState === 4) && (httpRequest.status === 200)) {
+						var data = JSON.parse(httpRequest.responseText);
+						if (callback) callback(data);
+					}
 				};
-				
-				var map = new google.maps.Map(document.getElementById("googleMap"),mapOptions);
+				httpRequest.open('GET', path);
+				httpRequest.send();
+				if ((httpRequest.readyState === 4) && (httpRequest.status === 200)) return data;
+			};
+
+
+			function initMap() {
+
+				// Get the JSON file and use it to init the map
+				fetchJSONFile('style/style.json', function(data){
+					// Create a new map stlyle
+					var styledMapType = new google.maps.StyledMapType(data,
+						{name: 'Road projection'});
+
+					// Set map options
+					var mapOptions = {
+						center: new google.maps.LatLng(51.503376, -0.119538),
+						zoom: 7,
+						mapTypeId: google.maps.MapTypeId.ROADMAP,
+
+						// Map elements typing
+						disableDefaultUI: true,
+						zoomControl: true,
+						mapTypeControl: true,
+						zoomControlOptions: {
+							position: google.maps.ControlPosition.LEFT_BOTTOM
+						},
+						gestureHandling: 'greedy', // disables the ctrl+scroll zooming
+
+						// Add types of map
+						mapTypeControlOptions: {
+	            mapTypeIds: ['styled_map', 'roadmap']
+	          }
+					};
+
+					// Map init
+					var map = new google.maps.Map(document.getElementById("googleMap"),mapOptions);
+
+					// Associate the styled map
+					map.mapTypes.set('styled_map', styledMapType);
+				});
 			}
 		</script>
-		
+
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEslfwKJo0N4lfsbZLwrSFzd7ic2e5Kz0&callback=initMap"></script>
 	</body>
 </html>
