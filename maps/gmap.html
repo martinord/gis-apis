@@ -6,7 +6,7 @@
 		<link rel="stylesheet" type="text/css" href="../css/site.css">
 	</head>
 	<body>
-		<h1 class="heading">My Google Maps Page</h1>
+		<h1 class="heading">Copernicus action world-wide</h1>
 		<div id = "googleMap"></div>
 
 		<script>
@@ -52,7 +52,7 @@
 
 						// Add types of map
 						mapTypeControlOptions: {
-	            mapTypeIds: ['styled_map', 'roadmap']
+	            mapTypeIds: ['road_project', 'roadmap']
 	          }
 					};
 
@@ -60,7 +60,21 @@
 					var map = new google.maps.Map(document.getElementById("googleMap"),mapOptions);
 
 					// Associate the styled map
-					map.mapTypes.set('styled_map', styledMapType);
+					map.mapTypes.set('road_project', styledMapType);
+
+					// Add a GEO RSS feed from COPERNICUS
+					var georssLayer = new google.maps.KmlLayer({
+							url: 'https://emergency.copernicus.eu/mapping/activations-rapid/feed'
+						});
+					georssLayer.setMap(map);
+
+					// Adjust center and zoom after loading the data
+					setTimeout(function(){
+						map.setCenter({lat:51.503376, lng:-0.119538});
+						map.setZoom(5);
+						map.setMapTypeId('road_project');
+					}, 2000);
+
 				});
 			}
 		</script>
