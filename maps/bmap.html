@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-<html> 
+<html>
 	<head>
-		<title>Martino Rivera - Bing Map</title>
+		<meta charset="utf-8">
+		<title>Martiño Rivera - Bing Map</title>
 		<link rel="stylesheet" type="text/css" href="../css/site.css">
 	</head>
 	<body>
 		<h1 class="heading">My Bing Maps API test</h1>
 		<div id="bingMap"></div>
-		
+
 		<script>
 			function loadMap() {
-				var theMap = 
-				new Microsoft.Maps.Map(document.getElementById('bingMap'), 
+				var theMap =
+				new Microsoft.Maps.Map(document.getElementById('bingMap'),
 								{
 										credentials: 'AkbAb1zrNzoFEpo5UDJRuugqkoUzAKC09iRghiMFp_H__HFq9OvJMNu6U14CgvAz' ,
 										center: new Microsoft.Maps.Location(51.503376, -0.119538),
 										mapTypeId: Microsoft.Maps.MapTypeId.road,
-										zoom: 7 
-								});      
+										zoom: 7
+								});
 				}
 		</script>
-		
+
 		<script src='https://www.bing.com/api/maps/mapcontrol?callback=loadMap'></script>
 	</body>
 </html>
-
