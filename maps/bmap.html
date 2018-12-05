@@ -4,24 +4,75 @@
 		<meta charset="utf-8">
 		<title>Martiño Rivera - Bing Map</title>
 		<link rel="stylesheet" type="text/css" href="../css/site.css">
+		<script type="text/javascript" src="../js/getjson.js"></script>
 	</head>
 	<body>
-		<h1 class="heading">My Bing Maps API test</h1>
+		<h1 class="heading">Earthquakes display</h1>
+
+		<form id="myform">
+			Start year: <input type="date" placeholder="2014" id="startyear"><br>
+			End year: <input type="date" placeholder="2015" id="endyear"><br><br>
+			<input type="button" onclick="update()" value="Update">
+		</form>
+
 		<div id="bingMap"></div>
 
-		<script>
+		<script type="text/javascript">
+			function update() {
+			//	var myform = document.getElementById("myform");
+				var startyear = document.getElementById("startyear").value;
+				var endyear = document.getElementById("endyear").value;
+				upgradeMap(startyear, endyear);
+			}
+		</script>
+
+		<script type="text/javascript">
+			var theMap;
+
 			function loadMap() {
-				var theMap =
+				theMap =
 				new Microsoft.Maps.Map(document.getElementById('bingMap'),
 								{
 										credentials: 'AkbAb1zrNzoFEpo5UDJRuugqkoUzAKC09iRghiMFp_H__HFq9OvJMNu6U14CgvAz' ,
-										center: new Microsoft.Maps.Location(51.503376, -0.119538),
-										mapTypeId: Microsoft.Maps.MapTypeId.road,
-										zoom: 7
+										center: new Microsoft.Maps.Location(0.000000, 0.000000),
+										mapTypeId: Microsoft.Maps.MapTypeId.aerial,
+										zoom: 3
 								});
-				}
+			}
+
+			// Define the function upgradeMap
+			// It is using the API from https://earthquake.usgs.gov/fdsnws/event/1/
+			// It loads using AJAX the file from the application of earthquake.usgs.gov and displays its content
+			// PROBLEM: If the range specified is too large, namely a year, the loading time is excesive
+			function upgradeMap(startyear, endyear){
+				var url = 'https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson';
+				var sttime_prefix = '&starttime=';
+				var entime_prefix = '&endtime=';
+				var limit = '&limit=2000';
+
+				// Creation of the query for the API
+				url = url.concat(sttime_prefix).concat(startyear);
+				url = url.concat(entime_prefix).concat(endyear);
+				url = url.concat(limit);
+
+				alert(url);
+
+				//Load the GeoJSON and HeatMap modules
+				Microsoft.Maps.loadModule(['Microsoft.Maps.GeoJson', 'Microsoft.Maps.HeatMap'], function () {
+					fetchJSONFile(url, function(myGeoJson){
+						//Parse the GeoJson object into a Bing Maps shape.
+							var shape = Microsoft.Maps.GeoJson.read(myGeoJson);
+							alert('Information got from https://earthquake.usgs.gov');
+							var heatMap = new Microsoft.Maps.HeatMapLayer(shape, { radius: 10,
+									propertyAsWeight: 'mag',
+							});
+							theMap.layers.insert(heatMap);	// Insertion of the changes in the map
+					});
+				});
+			}
+			// End of function definition
 		</script>
 
-		<script src='https://www.bing.com/api/maps/mapcontrol?callback=loadMap'></script>
+		<script type="text/javascript" src='https://www.bing.com/api/maps/mapcontrol?callback=loadMap'></script>
 	</body>
 </html>
