@@ -8,14 +8,21 @@
 	</head>
 	<body>
 		<h1 class="heading">Earthquakes display</h1>
-
+ <!-- TODO: Change alerts and prints. Change CSS and view of the page. Display LOADING image -->
+<div class="rightContainer">
+		<p>
+			INFO: This is a map that shows the earthquake heatmap of a range of time.
+			<br>
+			Important: The larger the range, the larger the time to load the data!
+		</p>
+		<br><br>
 		<form id="myform">
-			Start year: <input type="date" placeholder="2014" id="startyear"><br>
-			End year: <input type="date" placeholder="2015" id="endyear"><br><br>
-			<input type="button" onclick="update()" value="Update">
-		</form>
-
-		<div id="bingMap"></div>
+				Start date: <input type="date" placeholder="2014" id="startyear"><br>
+				End date (default TODAY): <input type="date" placeholder="2015" id="endyear"><br><br>
+				<input type="button" onclick="update()" value="Update">
+			</form>
+	</div>
+		<div class="leftContainer" id="bingMap"></div>
 
 		<script type="text/javascript">
 			function update() {
@@ -36,7 +43,7 @@
 										credentials: 'AkbAb1zrNzoFEpo5UDJRuugqkoUzAKC09iRghiMFp_H__HFq9OvJMNu6U14CgvAz' ,
 										center: new Microsoft.Maps.Location(0.000000, 0.000000),
 										mapTypeId: Microsoft.Maps.MapTypeId.aerial,
-										zoom: 3
+										zoom: 1
 								});
 			}
 
