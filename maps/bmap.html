@@ -51,6 +51,7 @@
 
 		<script type="text/javascript">
 			var theMap;
+			var heatMap;
 
 			function loadMap() {
 				theMap =
@@ -63,7 +64,7 @@
 								});
 			}
 
-			// Define the function upgradeMap
+			// Definition of the function upgradeMap
 			// It is using the API from https://earthquake.usgs.gov/fdsnws/event/1/
 			// It loads using AJAX the file from the application of earthquake.usgs.gov and displays its content
 			// PROBLEM: If the range specified is too large, namely a year, the loading time is excesive
@@ -89,9 +90,13 @@
 							var shape = Microsoft.Maps.GeoJson.read(myGeoJson);
 							alert('Information got from https://earthquake.usgs.gov');
 							display_complete();
-							var heatMap = new Microsoft.Maps.HeatMapLayer(shape, { radius: 10,
+							if (heatMap) {
+								theMap.layers.remove(heatMap);	// Remove the previous heat Map
+							}
+
+							heatMap = new Microsoft.Maps.HeatMapLayer(shape, { radius: 10,
 									propertyAsWeight: 'mag',
-							});
+								});
 							theMap.layers.insert(heatMap);	// Insertion of the changes in the map
 					});
 				});
