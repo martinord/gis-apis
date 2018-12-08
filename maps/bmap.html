@@ -9,7 +9,7 @@
 	<body>
 		<h1 class="heading">Earthquakes display</h1>
  <!-- TODO: Change alerts and prints. Change CSS and view of the page. Display LOADING image -->
-<div class="rightContainer">
+<div class="rightContainer" id="info-block">
 		<p>
 			INFO: This is a map that shows the earthquake heatmap of a range of time.
 			<br>
@@ -17,19 +17,35 @@
 		</p>
 		<br><br>
 		<form id="myform">
-				Start date: <input type="date" placeholder="2014" id="startyear"><br>
-				End date (default TODAY): <input type="date" placeholder="2015" id="endyear"><br><br>
+				Start date: <input type="date" placeholder="2014" id="starttime"><br>
+				End date (default TODAY): <input type="date" placeholder="2015" id="endtime"><br><br>
 				<input type="button" onclick="update()" value="Update">
 			</form>
 	</div>
 		<div class="leftContainer" id="bingMap"></div>
 
 		<script type="text/javascript">
+			function display_loading(){
+				var element = document.getElementById("loading");
+				if(element == null){
+					var element = document.createElement("div");
+					element.setAttribute('id', 'loading');
+				}
+				element.innerHTML = "Loading... <br> (This might take a few seconds)";
+				var container = document.getElementById("info-block");
+				container.appendChild(element);
+			}
+
+			function display_complete(){
+				var element = document.getElementById("loading");
+				element.innerHTML = "Information got and displayed!";
+			}
+
 			function update() {
 			//	var myform = document.getElementById("myform");
-				var startyear = document.getElementById("startyear").value;
-				var endyear = document.getElementById("endyear").value;
-				upgradeMap(startyear, endyear);
+				var starttime = document.getElementById("starttime").value;
+				var endtime = document.getElementById("endtime").value;
+				upgradeMap(starttime, endtime);
 			}
 		</script>
 
@@ -51,18 +67,20 @@
 			// It is using the API from https://earthquake.usgs.gov/fdsnws/event/1/
 			// It loads using AJAX the file from the application of earthquake.usgs.gov and displays its content
 			// PROBLEM: If the range specified is too large, namely a year, the loading time is excesive
-			function upgradeMap(startyear, endyear){
+			function upgradeMap(starttime, endtime){
 				var url = 'https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson';
 				var sttime_prefix = '&starttime=';
 				var entime_prefix = '&endtime=';
 				var limit = '&limit=2000';
 
 				// Creation of the query for the API
-				url = url.concat(sttime_prefix).concat(startyear);
-				url = url.concat(entime_prefix).concat(endyear);
+				url = url.concat(sttime_prefix).concat(starttime);
+				url = url.concat(entime_prefix).concat(endtime);
 				url = url.concat(limit);
 
-				alert(url);
+				alert('Getting information from earthquake.usgs.gov: Start time:' + starttime + ' End time:' + endtime);
+				display_loading();
+
 
 				//Load the GeoJSON and HeatMap modules
 				Microsoft.Maps.loadModule(['Microsoft.Maps.GeoJson', 'Microsoft.Maps.HeatMap'], function () {
@@ -70,6 +88,7 @@
 						//Parse the GeoJson object into a Bing Maps shape.
 							var shape = Microsoft.Maps.GeoJson.read(myGeoJson);
 							alert('Information got from https://earthquake.usgs.gov');
+							display_complete();
 							var heatMap = new Microsoft.Maps.HeatMapLayer(shape, { radius: 10,
 									propertyAsWeight: 'mag',
 							});
