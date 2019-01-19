@@ -8,23 +8,24 @@
 	</head>
 	<body>
 		<h1 class="heading">Earthquakes display</h1>
- <!-- TODO: Change alerts and prints. Change CSS and view of the page. Display LOADING image -->
-<div class="rightContainer" id="info-block">
-		<p>
-			INFO: This is a map that shows the earthquake heatmap of a range of time.
-			<br>
-			Important: The larger the range, the larger the time to load the data!
-		</p>
-		<br><br>
-		<form id="myform">
-				Start date: <input type="date" placeholder="2014" id="starttime"><br>
-				End date (default TODAY): <input type="date" placeholder="2015" id="endtime"><br><br>
-				<input type="button" onclick="update()" value="Update">
-			</form>
-	</div>
+		<div class="rightContainer" id="info-block">
+			<p>
+				INFO: This is a map that shows the earthquake heatmap of a range of time.
+				<br>
+				Important: The larger the range, the larger the time to load the data!
+			</p>
+			<br><br>
+			<form id="myform">
+					Start date: <input type="date" placeholder="2014" id="starttime"><br>
+					End date (default TODAY): <input type="date" placeholder="2015" id="endtime"><br><br>
+					<input type="button" onclick="update()" value="Update">
+				</form>
+		</div>
 		<div class="leftContainer" id="bingMap"></div>
 
 		<script type="text/javascript">
+			// Those functions are changing some html content to make the site
+			// more interactive for the user.
 			function display_loading(){
 				var element = document.getElementById("loading");
 				if(element == null){
@@ -41,8 +42,9 @@
 				element.innerHTML = "Information got and displayed!";
 			}
 
+			// This function reads the information introduced in the HTML5 form and calls
+			// upgradeMap function.
 			function update() {
-			//	var myform = document.getElementById("myform");
 				var starttime = document.getElementById("starttime").value;
 				var endtime = document.getElementById("endtime").value;
 				upgradeMap(starttime, endtime);
@@ -83,7 +85,7 @@
 				display_loading();
 
 
-				//Load the GeoJSON and HeatMap modules
+				//Load the GeoJSON and HeatMap modules, removing the previous heatmap and inserting the new one.
 				Microsoft.Maps.loadModule(['Microsoft.Maps.GeoJson', 'Microsoft.Maps.HeatMap'], function () {
 					fetchJSONFile(url, function(myGeoJson){
 						//Parse the GeoJson object into a Bing Maps shape.
@@ -91,7 +93,7 @@
 							alert('Information got from https://earthquake.usgs.gov');
 							display_complete();
 							if (heatMap) {
-								theMap.layers.remove(heatMap);	// Remove the previous heat Map
+								theMap.layers.remove(heatMap);	// Remove the previous heatmap
 							}
 
 							heatMap = new Microsoft.Maps.HeatMapLayer(shape, { radius: 10,
