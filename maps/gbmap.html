@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Martiño Rivera - Google Map</title>
+		<link rel="stylesheet" type="text/css" href="../css/site.css">
+	</head>
+	<body>
+		<h1 class="heading">Quantitive precipitation forecast (QPF)</h1>
+		<div id = "googleMap"></div>
+
+		<script>
+			function initMap() {
+
+					// Set map options
+					var mapOptions = {
+						center: new google.maps.LatLng(47.595712, -122.327695),
+						zoom: 8,
+						mapTypeId: google.maps.MapTypeId.TERRAIN,
+
+						// Map elements typing
+						disableDefaultUI: true,
+						zoomControl: true,
+            fullscreenControl: true,
+						mapTypeControl: false,
+						zoomControlOptions: {
+							position: google.maps.ControlPosition.RIGHT_BOTTOM
+						},
+						gestureHandling: 'greedy', // disables the ctrl+scroll zooming
+					};
+
+					// Map init
+					var map = new google.maps.Map(document.getElementById("googleMap"),mapOptions);
+
+					// Add a KML file from the weather prediction center
+					var kmlinfo = new google.maps.KmlLayer({
+							url: 'https://www.wpc.ncep.noaa.gov/kml/qpf/QPF24hr_Day1_latest.kml'
+						});
+					kmlinfo.setMap(map);
+			}
+		</script>
+
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEslfwKJo0N4lfsbZLwrSFzd7ic2e5Kz0&callback=initMap"></script>
+	</body>
+</html>
