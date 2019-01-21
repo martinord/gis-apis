@@ -29,6 +29,10 @@ html, body {
 	height: 85%;
 }
 
+#map {
+	height: 85%;
+}
+
 .rightContainer {
 	float: right;
 	margin-left: 5px;
