@@ -12,20 +12,21 @@ html, body {
 
 .heading{
 	margin: auto;
+	height: 10%;
 	width: 90%;
 	padding: 1%;
 	text-align: center;
 }
 
-.heading > h1{font-size:20}
-.heading > h2{font-size:17}
+.heading > h1{font-size:20px}
+.heading > h2{font-size:17px}
 
 #googleMap {
-	height: 90%;
+	height: 85%;
 }
 
 #bingMap {
-	height: 90%;
+	height: 85%;
 }
 
 .rightContainer {
