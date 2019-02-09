@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>FOSS Maps - 01</title>
+  <link rel="stylesheet" type="text/css" href="../css/site.css">
+  <script type="text/javascript" src="../js/getjson.js"></script>
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+  integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+  crossorigin=""/>
+
+  <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+  integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+  crossorigin=""></script>
+
+</head>
+<body>
+  <div class="heading">
+    <h1>Martiño Rivera Dourado (18111777)</h1>
+    <h2>01 - Leaflet Map</h2>
+  </div>
+
+  <div id="map"></div>
+
+  <script type="text/javascript">
+
+    // Mapbox tile server
+
+    var mapboxlayer = L.tileLayer(
+    'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiMTgxMTE3NzciLCJhIjoiY2pyNm04azU3MGM0ODQ4bGhscXhjcHAzZyJ9.oZ8rkgiiXS6v5h6hGcKezg', {
+      maxZoom: 18,
+      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+        '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+        'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+      id: 'mapbox.streets'
+    });
+
+    // Idea: semen tile server. Let the user choose the tile server
+    // Add ships, planes...
+
+    var stamenlayer = L.tileLayer(
+      'http://tile.stamen.com/watercolor/{z}/{x}/{y}.jpg',{
+      maxZoom: 18,
+      attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. '
+                  + 'Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.',
+      id: 'stamen.watercolor'
+    });
+
+    // Init map
+    var mymap = L.map('map', {
+      center: [51.505, -0.09],
+      zoom: 5,
+      layers: [mapboxlayer, stamenlayer]
+    });
+
+    // Add controls
+    var baseMaps = {
+      "Mapbox": mapboxlayer,
+      "Stamen": stamenlayer
+    };
+    L.control.layers(baseMaps).addTo(mymap);  // Choose base maps
+  </script>
+
+</body>
+</html>
