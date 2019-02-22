@@ -65,12 +65,19 @@
     // Add data layer
     // Add manual markers and enable pop-up info. Idea: where I have been (like a record of my trips)
 
+    // Personalized icon
+    // Icon made by https://www.flaticon.com/authors/freepik from www.flaticon.com
+    var earth_icon = L.icon({
+      iconUrl: '../data/marker_earth.png',
+      iconSize: [45, 45],
+    });
+
     // Personalized class of a marker with a description
     class PopMarker {
       constructor({location, description}){
         this.description = description;
         this.popup = L.popup({closeButton: false});
-        this.marker = L.marker(location);
+        this.marker = L.marker(location, {icon: earth_icon});
       };
 
       add(map) {
@@ -80,6 +87,8 @@
       }
     };
 
+
+    // Creation of markers
     var uni_spain = new PopMarker({
       location: [43.333046, -8.411017],
       description: 'University of A Coruña',
@@ -90,8 +99,13 @@
       description: 'University of South Wales',
     });
 
-    uni_spain.add(mymap);
-    usw.add(mymap);
+    // Add the markers
+    var markers = [uni_spain, usw];
+    markers.forEach(
+      function(item){
+        item.add(mymap);
+      }
+    );
 
   </script>
 
