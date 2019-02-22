@@ -18,7 +18,7 @@
 <body>
   <div class="heading">
     <h1>Martiño Rivera Dourado (18111777)</h1>
-    <h2>01 - Leaflet Map</h2>
+    <h2>My trips record</h2>
   </div>
 
   <div id="map"></div>
@@ -50,7 +50,7 @@
     // Init map
     var mymap = L.map('map', {
       center: [51.505, -0.09],
-      zoom: 5,
+      zoom: 4,
       layers: [mapboxlayer, stamenlayer]
     });
 
@@ -60,6 +60,39 @@
       "Stamen": stamenlayer
     };
     L.control.layers(baseMaps).addTo(mymap);  // Choose base maps
+
+
+    // Add data layer
+    // Add manual markers and enable pop-up info. Idea: where I have been (like a record of my trips)
+
+    // Personalized class of a marker with a description
+    class PopMarker {
+      constructor({location, description}){
+        this.description = description;
+        this.popup = L.popup({closeButton: false});
+        this.marker = L.marker(location);
+      };
+
+      add(map) {
+        this.popup.setContent(this.description);
+        this.marker.bindPopup(this.popup);
+        this.marker.addTo(map);
+      }
+    };
+
+    var uni_spain = new PopMarker({
+      location: [43.333046, -8.411017],
+      description: 'University of A Coruña',
+    });
+
+    var usw = new PopMarker({
+      location: [51.590030, -3.329507],
+      description: 'University of South Wales',
+    });
+
+    uni_spain.add(mymap);
+    usw.add(mymap);
+
   </script>
 
 </body>
