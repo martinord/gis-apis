@@ -91,16 +91,25 @@
     // Creation of markers
     var uni_spain = new PopMarker({
       location: [43.333046, -8.411017],
-      description: 'University of A Coruña',
+      description:
+      '<h4> University of A Coruña <h4>',
     });
 
     var usw = new PopMarker({
       location: [51.590030, -3.329507],
-      description: 'University of South Wales',
+      description:
+      '<h4> University of South Wales </h4>',
+    });
+
+    var fai = new PopMarker({
+      location: [44.462981, 5.830080],
+      description:
+        '<h3> La ferme du Faï </h3>' +
+        '<a href="http://www.villagesdesjeunes.org/index.php?page=fai" target = "_blank">Villages des jeunes</a>',
     });
 
     // Add the markers
-    var markers = [uni_spain, usw];
+    var markers = [uni_spain, usw, fai];
     markers.forEach(
       function(item){
         item.add(mymap);
