@@ -61,3 +61,14 @@ html, body {
     opacity: 0;
   }
 }
+
+.mouse-position {
+    top: 8px;
+    right: 8px;
+		height: 25px;
+		width: 350px;
+		position: relative;
+		padding: 2px;
+		margin: 6px;
+		border: 2px solid red;
+}

@@ -5,7 +5,8 @@
   <title>FOSS Maps - 02</title>
   <link rel="stylesheet" type="text/css" href="../css/site.css">
   <!-- Openlayers -->
-   <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
+  <link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css" type="text/css">
+  <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
 </head>
 <body>
   <div class="heading">
@@ -13,21 +14,45 @@
     <h2>02 - Open Layers map</h2>
   </div>
 
-  <div id="map"></div>
+  <div class="leftContainer" id="map"></div>
+
+  <div class="rightContainer">
+    Mouse position in the map:
+    <div id="mouse-position"></div>
+  </div>
 
   <script type="text/javascript">
-  var map = new ol.Map({
-      target: 'map',
-      layers: [
-        new ol.layer.Tile({
-          source: new ol.source.OSM()
-        })
-      ],
-      view: new ol.View({
-        center: ol.proj.transform([-0.09, 51.505], 'EPSG:4326', 'EPSG:3857'), // lat and long also swapped
-        zoom: 13
-      })
-    });
+    var map = new ol.Map({
+        target: 'map',
+        controls: [
+          new ol.control.Attribution({
+            collapsible: false
+          }),
+          new ol.control.FullScreen({
+            keys: true
+          }),
+          new ol.control.MousePosition({
+            className: 'mouse-position',
+            target: 'mouse-position'
+          }),
+        ],
+        layers: [
+          new ol.layer.Tile({
+            source: new ol.source.XYZ({
+              attributions: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors,' +
+                            '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                            'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+              format: new ol.format.MVT(),
+              url: 'https://api.tiles.mapbox.com/v4/mapbox.satellite/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiMTgxMTE3NzciLCJhIjoiY2pyNm04azU3MGM0ODQ4bGhscXhjcHAzZyJ9.oZ8rkgiiXS6v5h6hGcKezg',
+              maxZoom: 18
+            })
+          })
+        ],
+        view: new ol.View({
+          center: ol.proj.fromLonLat([-0.09, 51.505]),  // long and lat swapped
+          zoom: 13
+        }),
+      });
   </script>
 
 </body>
