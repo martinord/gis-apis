@@ -18,6 +18,8 @@
     <div class="rightContainer">
       Mouse position in the map:
       <div id="mouse-position"></div>
+      <br>
+      <div id="marker"></div>
     </div>
   </div>
 
@@ -35,6 +37,10 @@
             className: 'mouse-position',
             target: 'mouse-position'
           }),
+          new ol.control.ScaleLine({
+            minWidth: 100
+          }),
+          new ol.control.ZoomSlider(),
         ],
         layers: [
           new ol.layer.Tile({
@@ -53,6 +59,16 @@
           zoom: 13
         }),
       });
+
+      // Dynamic point selection
+      // Event handler
+      function changetoclicked (evt) {
+          document.getElementById('marker').innerHTML =
+          'Selected marker: ' + evt.coordinate;
+      };
+
+      // Event listener (interaction)
+      map.on('click', changetoclicked);
   </script>
 
 </body>
