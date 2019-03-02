@@ -11,20 +11,22 @@
 			<h1>Martiño Rivera Dourado (18111777)</h1>
 			<h2>Earthquakes display</h2>
 		</div>
-		<div class="rightContainer" id="info-block">
-			<p>
-				INFO: This is a map that shows the earthquake heatmap of a range of time.
-				<br>
-				Important: The larger the range, the larger the time to load the data!
-			</p>
-			<br><br>
-			<form id="myform">
-					Start date: <input type="date" placeholder="2014" id="starttime"><br>
-					End date (default TODAY): <input type="date" placeholder="2015" id="endtime"><br><br>
-					<input type="button" onclick="update()" value="Update">
-				</form>
+		<div class="desk">
+			<div class="rightContainer" id="info-block">
+				<p>
+					INFO: This is a map that shows the earthquake heatmap of a range of time.
+					<br>
+					Important: The larger the range, the larger the time to load the data!
+				</p>
+				<br><br>
+				<form id="myform">
+						Start date: <input type="date" placeholder="2014" id="starttime"><br>
+						End date (default TODAY): <input type="date" placeholder="2015" id="endtime"><br><br>
+						<input type="button" onclick="update()" value="Update">
+					</form>
+			</div>
+			<div class="leftContainer" id="bingMap"></div>
 		</div>
-		<div class="leftContainer" id="bingMap"></div>
 
 		<script type="text/javascript">
 			// Those functions are changing some html content to make the site

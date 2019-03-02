@@ -2,6 +2,7 @@
 
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
+/* Basic */
 html, body {
 	font-family: 'Open Sans';
 	width: 100%;
@@ -10,6 +11,7 @@ html, body {
 	padding: 0;
 }
 
+/* Layout: heading and desk */
 .heading{
 	margin: auto;
 	height: 10%;
@@ -18,36 +20,50 @@ html, body {
 	text-align: center;
 }
 
-.heading > h1{font-size:20px}
-.heading > h2{font-size:17px}
-
-#googleMap {
+.desk{
 	height: 85%;
+	width: 100%;
 }
 
-#bingMap {
-	height: 85%;
-}
-
-#map {
-	height: 85%;
-}
+/* Layout: containers */
 
 .rightContainer {
 	float: right;
-	margin-left: 5px;
 	width: 25%;
+	padding: 0;
+	margin-left: 5px;
+	height: 100%;
 	position: relative;
-  top: 20%;
-  transform: translateY(-50%);
 }
 
 .leftContainer {
 	float: left;
 	width: 70%;
 	padding: 0;
+	margin-right: 5px;
+	height: 100%;
+	position: relative;
 }
 
+/* Font size heading */
+.heading > h1{font-size:20px}
+.heading > h2{font-size:17px}
+
+
+/* MAPS layout */
+#googleMap {
+	height: 100%;
+}
+
+#bingMap {
+	height: 100%;
+}
+/* Any map */
+#map {
+	height: 100%;
+}
+
+/* Animations */
 #loading {
 	animation: blinker 3s linear infinite;
 	color: red;
