@@ -60,11 +60,36 @@
         }),
       });
 
+      // Markers layer
+      var markers_source = new ol.source.Vector();
+      map.addLayer(new ol.layer.Vector({
+       source: markers_source,
+       style: new ol.style.Style({
+         // Personalized icon
+         // Icon made by https://www.freepik.com/ from www.flaticon.com
+         image: new ol.style.Icon({
+           scale: 0.1,
+           anchor: [0.5, 1],
+           anchorXUnits: 'fraction',
+           anchorYUnits: 'fraction',
+           src: '../data/marker_blue.png'
+         })
+       }),
+     }));
+
+      function addMarker() {
+        var coordinates = document.getElementById('selected_marker').innerHTML.split(',');
+        var marker_feature = new ol.Feature(new ol.geom.Point(coordinates));
+        markers_source.addFeature(marker_feature);
+      };
+
       // Dynamic point selection
       // Event handler
       function changetoclicked (evt) {
           document.getElementById('marker').innerHTML =
-          'Selected marker: ' + evt.coordinate;
+          'Point selected: <div id="selected_marker">' + evt.coordinate + '</div>' +
+          '<br>' +
+          '<input type="button" value="Add Marker" onClick="addMarker()">';
       };
 
       // Event listener (interaction)
