@@ -19,7 +19,18 @@
       Mouse position in the map:
       <div id="mouse-position"></div>
       <br>
-      <div id="marker"></div>
+      <div id="marker">
+        Point selected: <div id="selected_marker"></div>
+        <br>
+        <input type="text" id="marker_id" placeholder="Marker name">
+        <input type="button" value="Add Marker" onClick="addMarker()"
+      </div>
+      <br> <br>
+      Selected marker:
+      <div id="selected">
+        Name: <div id="selected-name"></div>
+        Coordinates: <div id="selected-coordinates"></div>
+      </div>
     </div>
   </div>
 
@@ -56,12 +67,14 @@
         ],
         view: new ol.View({
           center: ol.proj.fromLonLat([-0.09, 51.505]),  // long and lat swapped
-          zoom: 13
+          zoom: 7
         }),
       });
 
       // Markers layer
       var markers_source = new ol.source.Vector();
+      var anon_counter = 0; // Counter of not named markers added
+
       map.addLayer(new ol.layer.Vector({
        source: markers_source,
        style: new ol.style.Style({
@@ -78,22 +91,41 @@
      }));
 
       function addMarker() {
+        var id = document.getElementById('marker_id').value;
         var coordinates = document.getElementById('selected_marker').innerHTML.split(',');
         var marker_feature = new ol.Feature(new ol.geom.Point(coordinates));
+        document.getElementById('marker_id').value = ""; // Reset input
+        if (id.length == 0){
+          alert('Insert a name for the marker');
+          return;
+        }
+        marker_feature.setId(id);
         markers_source.addFeature(marker_feature);
       };
 
       // Dynamic point selection
       // Event handler
       function changetoclicked (evt) {
-          document.getElementById('marker').innerHTML =
-          'Point selected: <div id="selected_marker">' + evt.coordinate + '</div>' +
-          '<br>' +
-          '<input type="button" value="Add Marker" onClick="addMarker()">';
+        // TODO: change this to static html. Add the coordinates to id selected_marker
+        // TODO: add another projection of the coordinates
+          document.getElementById('selected_marker').innerHTML = evt.coordinate;
       };
 
       // Event listener (interaction)
       map.on('click', changetoclicked);
+
+      // Feature selection and information display
+      var mouse = new ol.interaction.Select({
+        condition: ol.events.singleclick
+      });
+
+      map.addInteraction(mouse);
+      mouse.on('select', function(evt){
+        if (evt.selected.length == 0) return;
+        document.getElementById('selected-name').innerHTML = evt.selected[0].getId();
+        document.getElementById('selected-coordinates').innerHTML = evt.mapBrowserEvent.coordinate;
+      });
+
   </script>
 
 </body>
