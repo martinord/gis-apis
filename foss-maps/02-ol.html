@@ -16,20 +16,21 @@
   <div class="desk">
     <div class="leftContainer" id="map"></div>
     <div class="rightContainer">
-      Mouse position in the map:
-      <div id="mouse-position"></div>
-      <br>
-      <div id="marker">
-        Point selected: <div id="selected_marker"></div>
-        <br>
+      <div class="vertical-box">
+        <h3>Mouse position in the map</h3>
+        <div id="mouse-position" class="coordinate-display"></div>
+      </div>
+      <div id="marker" class="vertical-box">
+        <h3>Point selected:</h3>
+        <div id="selected_point" class="coordinate-display"></div> <br>
         <input type="text" id="marker_id" placeholder="Marker name">
         <input type="button" value="Add Marker" onClick="addMarker()"
       </div>
-      <br> <br>
-      Selected marker:
-      <div id="selected">
-        Name: <div id="selected-name"></div>
-        Coordinates: <div id="selected-coordinates"></div>
+      <div id="selected" class="vertical-box">
+        <h3>Selected marker:</h3>
+        <b>Name: </b><div id="selected-name"></div>
+        <br>
+        <b>Coordinates: </b><div id="selected-coordinates"></div>
       </div>
     </div>
   </div>
@@ -92,7 +93,7 @@
 
       function addMarker() {
         var id = document.getElementById('marker_id').value;
-        var coordinates = document.getElementById('selected_marker').innerHTML.split(',');
+        var coordinates = document.getElementById('selected_point').innerHTML.split(',');
         var marker_feature = new ol.Feature(new ol.geom.Point(coordinates));
         document.getElementById('marker_id').value = ""; // Reset input
         if (id.length == 0){
@@ -106,9 +107,9 @@
       // Dynamic point selection
       // Event handler
       function changetoclicked (evt) {
-        // TODO: change this to static html. Add the coordinates to id selected_marker
+        // TODO: change this to static html. Add the coordinates to id selected_point
         // TODO: add another projection of the coordinates
-          document.getElementById('selected_marker').innerHTML = evt.coordinate;
+          document.getElementById('selected_point').innerHTML = evt.coordinate;
       };
 
       // Event listener (interaction)

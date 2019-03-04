@@ -45,6 +45,11 @@ html, body {
 	position: relative;
 }
 
+.vertical-box{
+		margin-top: 10%;
+		margin-bottom: 10%;
+}
+
 /* Font size heading */
 .heading > h1{font-size:20px}
 .heading > h2{font-size:17px}
@@ -79,14 +84,19 @@ html, body {
 }
 
 /* Other elements */
-.mouse-position {
-    top: 8px;
+.coordinate-display {
     right: 8px;
 		height: 25px;
 		width: 350px;
 		position: relative;
 		padding: 2px;
 		margin: 6px;
-		border: 2px solid red;
+		border: 2px solid grey;
+		border-radius: 10px;
 		font-weight: bold;
+		text-align: center;
+}
+
+#selected-name, #selected-coordinates {
+		display: inline-block;
 }
