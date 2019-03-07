@@ -37,8 +37,6 @@
       id: 'mapbox.streets'
     });
 
-    // Idea: semen tile server. Let the user choose the tile server
-    // Add ships, planes...
 
     var stamenlayer = L.tileLayer(
       'http://tile.stamen.com/watercolor/{z}/{x}/{y}.jpg',{
@@ -90,27 +88,53 @@
 
 
     // Creation of markers
-    var uni_spain = new PopMarker({
-      location: [43.333046, -8.411017],
-      description:
-      '<h4> University of A Coruña <h4>',
-    });
+    var markers = [
+      new PopMarker({
+        location: [43.333046, -8.411017],
+        description:
+          '<h3> University of A Coruña </h3>' +
+          '<a href="https://www.udc.gal" target = "_blank">UDC webpage</a>' +
+          '<p> The city of my undergraduate studies! </p>',
+      }),
 
-    var usw = new PopMarker({
-      location: [51.590030, -3.329507],
-      description:
-      '<h4> University of South Wales </h4>',
-    });
+      new PopMarker({
+        location: [51.590030, -3.329507],
+        description:
+          '<h3> University of South Wales </h3>' +
+          '<a href="https://www.southwales.ac.uk/" target = "_blank">USW webpage</a>' +
+          '<p>I have studied my third year of Computer Science here as an Erasmus student<p>'
+      }),
 
-    var fai = new PopMarker({
-      location: [44.462981, 5.830080],
-      description:
-        '<h3> La ferme du Faï </h3>' +
-        '<a href="http://www.villagesdesjeunes.org/index.php?page=fai" target = "_blank">Villages des jeunes</a>',
-    });
+      new PopMarker({
+        location: [44.462981, 5.830080],
+        description:
+          '<h3> La ferme du Faï </h3>' +
+          '<a href="http://www.villagesdesjeunes.org/index.php?page=fai" target = "_blank">Villages des jeunes</a>' +
+          '<p> I did a workcamp during three weeks in this spot. Lots of international youthworkers doing something amazing together!<p>',
+      }),
 
-    // Add the markers
-    var markers = [uni_spain, usw, fai];
+      new PopMarker({
+        location: [40.641398, -8.655271],
+        description:
+          '<h3> Aveiro </h3>' +
+          '<p>I visited Avieiro with my parents. It was amazing, some call it the "Portugese Venecia"</p>',
+      }),
+
+      new PopMarker({
+        location: [48.859717, 2.351181],
+        description:
+          '<h3>Paris</h3>' +
+          '<p> A trip to the capital city of France with my classmates in my primary studies</p>',
+      }),
+
+      new PopMarker({
+        location: [41.403488, 2.172128],
+        description:
+          '<h3>Barcelona</h3>' +
+          '<p>I spent a weekend with a friend studying here, I really loved the city!</p>',
+      })
+    ];
+
     markers.forEach(
       function(item){
         item.add(mymap);

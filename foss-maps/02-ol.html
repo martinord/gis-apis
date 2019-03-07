@@ -11,23 +11,26 @@
 <body>
   <div class="heading">
     <h1>Martiño Rivera Dourado (18111777)</h1>
-    <h2>02 - Open Layers map</h2>
+    <h2>Dynamic markers</h2>
   </div>
   <div class="desk">
     <div class="leftContainer" id="map"></div>
     <div class="rightContainer">
       <div class="vertical-box">
-        <h3>Mouse position in the map</h3>
+        <h2>Mouse position in the map</h2>
         <div id="mouse-position" class="coordinate-display"></div>
       </div>
       <div id="marker" class="vertical-box">
-        <h3>Point selected:</h3>
-        <div id="selected_point" class="coordinate-display"></div> <br>
-        <input type="text" id="marker_id" placeholder="Marker name">
-        <input type="button" value="Add Marker" onClick="addMarker()"
+        <h2>Point selected</h2>
+        <b>EPSG:3857</b>:
+        <div id="selected_point" class="coordinate-display"></div>
+        <b>EPSG:4326</b>:
+        <div id="selected_point_4326" class="coordinate-display"></div> <br>
+        <input type="text" id="marker_id" placeholder="Marker name"></input>
+        <input type="button" value="Add Marker" onClick="addMarker()"></input>
       </div>
       <div id="selected" class="vertical-box">
-        <h3>Selected marker:</h3>
+        <h2>Selected marker</h2>
         <b>Name: </b><div id="selected-name"></div>
         <br>
         <b>Coordinates: </b><div id="selected-coordinates"></div>
@@ -107,9 +110,9 @@
       // Dynamic point selection
       // Event handler
       function changetoclicked (evt) {
-        // TODO: change this to static html. Add the coordinates to id selected_point
-        // TODO: add another projection of the coordinates
           document.getElementById('selected_point').innerHTML = evt.coordinate;
+          document.getElementById('selected_point_4326').innerHTML =
+              ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326');
       };
 
       // Event listener (interaction)
