@@ -12,18 +12,23 @@
 			<h2>Earthquakes display</h2>
 		</div>
 		<div class="desk">
-			<div class="rightContainer" id="info-block">
-				<p>
-					INFO: This is a map that shows the earthquake heatmap of a range of time.
-					<br>
-					Important: The larger the range, the larger the time to load the data!
-				</p>
-				<br><br>
-				<form id="myform">
+			<div class="rightContainer">
+				<div class="vertical-box">
+					<h2>Data range</h2>
+					<form id="myform">
 						Start date: <input type="date" placeholder="2014" id="starttime"><br>
-						End date (default TODAY): <input type="date" placeholder="2015" id="endtime"><br><br>
+						End date: <input type="date" placeholder="2015" id="endtime"><br><br>
 						<input type="button" onclick="update()" value="Update">
 					</form>
+				</div>
+				<div class="vertical-box" id="loading"></div>
+				<div class="vertical-box">
+					<h2>Usage</h2>
+					<b>
+						This is a map that shows the earthquake heatmap of a range of time. Larger amount of data, take longer to request.
+					</b>
+					<br> <br> By default, the last 30 days information is displayed.
+				</div>
 			</div>
 			<div class="leftContainer" id="bingMap"></div>
 		</div>
@@ -33,18 +38,12 @@
 			// more interactive for the user.
 			function display_loading(){
 				var element = document.getElementById("loading");
-				if(element == null){
-					var element = document.createElement("div");
-					element.setAttribute('id', 'loading');
-				}
 				element.innerHTML = "Loading... <br> (This might take a few seconds)";
-				var container = document.getElementById("info-block");
-				container.appendChild(element);
 			}
 
 			function display_complete(){
 				var element = document.getElementById("loading");
-				element.innerHTML = "Information got and displayed!";
+				element.innerHTML = "Information received and displayed!";
 			}
 
 			// This function reads the information introduced in the HTML5 form and calls
@@ -86,7 +85,6 @@
 				url = url.concat(entime_prefix).concat(endtime);
 				url = url.concat(limit);
 
-				alert('Getting information from earthquake.usgs.gov: Start time:' + starttime + ' End time:' + endtime);
 				display_loading();
 
 
@@ -95,7 +93,6 @@
 					fetchJSONFile(url, function(myGeoJson){
 						//Parse the GeoJson object into a Bing Maps shape.
 							var shape = Microsoft.Maps.GeoJson.read(myGeoJson);
-							alert('Information got from https://earthquake.usgs.gov');
 							display_complete();
 							if (heatMap) {
 								theMap.layers.remove(heatMap);	// Remove the previous heatmap

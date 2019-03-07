@@ -91,6 +91,7 @@ html, body {
 	top: 30%;
 	text-align: center;
 	width: 100%;
+	font-size: 1.15em;
 }
 
 @keyframes blinker {
