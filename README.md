@@ -1,7 +1,7 @@
 # GIS scripts
 ## Intro
 
-Repository showing the work done in the _GIS & Spatial Web_ module during my Erasmus studies at the [USW](https://www.southwales.ac.uk/). This [pdf](https://github.com/martinord/gis-apis/docs/report.pdf) illustrates the purpose of this coursework.
+Repository showing the work done in the _GIS & Spatial Web_ module during my Erasmus studies at the [USW](https://www.southwales.ac.uk/). This [pdf](https://github.com/martinord/gis-apis/blob/master/docs/report.pdf) illustrates the purpose of this coursework.
 
 
 ## Usage
